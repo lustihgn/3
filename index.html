@@ -3,147 +3,144 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trái tim & Ảnh bay</title>
+<title>Happy Birthday</title>
 
 <style>
-/* ÉP MÀN HÌNH NGANG */
-body {
-    margin: 0;
-    width: 100vh;
-    height: 100vw;
-    transform: rotate(90deg);
-    transform-origin: left top;
-    position: absolute;
-    top: -100vw;
-    left: 0;
-    background: linear-gradient(#ffe6f0, #fff);
-    overflow: hidden;
-    font-family: Arial, sans-serif;
-}
-
-/* TRÁI TIM Ở GIỮA */
-.heart {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 220px;
-    height: 200px;
-    background: gold;
-    transform: translate(-50%, -50%) rotate(-45deg);
-    z-index: 2;
-}
-
-.heart::before,
-.heart::after {
-    content: "";
-    position: absolute;
-    width: 220px;
-    height: 200px;
-    background: gold;
-    border-radius: 50%;
-}
-
-.heart::before {
-    top: -110px;
-    left: 0;
-}
-
-.heart::after {
-    left: 110px;
-    top: 0;
-}
-
-/* CHỮ TRONG TRÁI TIM */
-.heart-text {
-    position: absolute;
-    width: 100%;
-    text-align: center;
-    color: #c4005c;
-    font-size: 22px;
-    font-weight: bold;
-    transform: rotate(45deg);
-    top: 75px;
-}
-
-/* HÌNH TRÒN CHỨA ẢNH */
-.photo {
-    position: absolute;
-    bottom: -140px;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 4px solid #fff;
-    box-shadow: 0 8px 18px rgba(0,0,0,0.25);
-    animation: flyUp linear infinite;
-    z-index: 1;
-}
-
-.photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* BAY TỪ DƯỚI LÊN */
-@keyframes flyUp {
-    from {
-        transform: translateY(0);
-        opacity: 0;
+    body{
+        margin:0;
+        background:black;
+        overflow:hidden;
+        font-family: Arial, sans-serif;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+        transform: rotate(90deg);
+        transform-origin:center;
     }
-    10% {
-        opacity: 1;
+
+    .container{
+        position:relative;
+        width:100vh;
+        height:100vw;
+        display:flex;
+        justify-content:center;
+        align-items:center;
     }
-    to {
-        transform: translateY(-130vh);
-        opacity: 0;
+
+    /* Trái tim */
+    .heart{
+        position:absolute;
+        width:200px;
+        height:200px;
+        background:red;
+        transform: rotate(-45deg);
+        animation: beat 1s infinite;
     }
-}
+
+    .heart:before,
+    .heart:after{
+        content:"";
+        position:absolute;
+        width:200px;
+        height:200px;
+        background:red;
+        border-radius:50%;
+    }
+
+    .heart:before{
+        top:-100px;
+        left:0;
+    }
+
+    .heart:after{
+        left:100px;
+        top:0;
+    }
+
+    @keyframes beat{
+        0%{transform: rotate(-45deg) scale(1);}
+        50%{transform: rotate(-45deg) scale(1.1);}
+        100%{transform: rotate(-45deg) scale(1);}
+    }
+
+    /* Chữ trên trái tim */
+    .text{
+        position:absolute;
+        color:white;
+        font-size:30px;
+        font-weight:bold;
+        z-index:2;
+        text-align:center;
+    }
+
+    /* Hình tròn ảnh */
+    .bubble{
+        position:absolute;
+        width:100px;
+        height:100px;
+        border-radius:50%;
+        overflow:hidden;
+        animation: floatUp 10s linear infinite;
+    }
+
+    .bubble img{
+        width:100%;
+        height:100%;
+        object-fit:cover;
+    }
+
+    .left{
+        left:50px;
+    }
+
+    .right{
+        right:50px;
+    }
+
+    @keyframes floatUp{
+        0%{
+            bottom:-120px;
+            opacity:0;
+        }
+        20%{
+            opacity:1;
+        }
+        100%{
+            bottom:110%;
+            opacity:0;
+        }
+    }
 </style>
 </head>
 
 <body>
 
-<!-- TRÁI TIM -->
-<div class="heart">
-    <div class="heart-text">
-        Anh ❤️ Em
+<div class="container">
+
+    <!-- Chữ -->
+    <div class="text">Happy Birthday ❤️</div>
+
+    <!-- Trái tim -->
+    <div class="heart"></div>
+
+    <!-- Ảnh bên trái -->
+    <div class="bubble left" style="animation-delay:0s;">
+        <img src="image1.jpg">
     </div>
+    <div class="bubble left" style="animation-delay:4s;">
+        <img src="image2.jpg">
+    </div>
+
+    <!-- Ảnh bên phải -->
+    <div class="bubble right" style="animation-delay:2s;">
+        <img src="image1.jpg">
+    </div>
+    <div class="bubble right" style="animation-delay:6s;">
+        <img src="image2.jpg">
+    </div>
+
 </div>
-
-<script>
-/* DANH SÁCH ẢNH (THAY ẢNH CỦA BẠN) */
-const images = [
-    "https://i.imgur.com/8Km9tLL.jpg",
-    "https://i.imgur.com/ZXBtVw7.jpg",
-    "https://i.imgur.com/4AiXzf8.jpg",
-    "https://i.imgur.com/vxXh4Yg.jpg"
-];
-
-function createPhoto(side) {
-    const div = document.createElement("div");
-    div.className = "photo";
-
-    const img = document.createElement("img");
-    img.src = images[Math.floor(Math.random() * images.length)];
-    div.appendChild(img);
-
-    if (side === "left") {
-        div.style.left = Math.random() * 18 + "%";
-    } else {
-        div.style.right = Math.random() * 18 + "%";
-    }
-
-    div.style.animationDuration = (7 + Math.random() * 4) + "s";
-    document.body.appendChild(div);
-
-    setTimeout(() => div.remove(), 12000);
-}
-
-/* TẠO ẢNH BAY 2 BÊN */
-setInterval(() => createPhoto("left"), 1500);
-setInterval(() => createPhoto("right"), 1700);
-</script>
 
 </body>
 </html>
