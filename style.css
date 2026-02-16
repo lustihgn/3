@@ -1,4 +1,18 @@
-/* Ép xoay ngang trên điện thoại */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: black;
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* =========================
+   ÉP XOAY NGANG TRÊN MOBILE
+========================= */
 @media screen and (orientation: portrait) {
   body {
     transform: rotate(90deg);
@@ -9,5 +23,96 @@
     top: 0;
     left: 100%;
     overflow: hidden;
+  }
+}
+
+/* =========================
+   BỐ CỤC 3 CỘT
+========================= */
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Hai bên để bóng */
+.side {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Trung tâm */
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: pink;
+  z-index: 2;
+}
+
+.center h1 {
+  margin-bottom: 25px;
+  font-size: 28px;
+}
+
+/* =========================
+   TRÁI TIM
+========================= */
+.heart {
+  width: 140px;
+  height: 140px;
+  background: red;
+  position: relative;
+  transform: rotate(-45deg);
+  animation: beat 1s infinite;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  width: 140px;
+  height: 140px;
+  background: red;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.heart::before {
+  top: -70px;
+  left: 0;
+}
+
+.heart::after {
+  left: 70px;
+  top: 0;
+}
+
+@keyframes beat {
+  0%, 100% {
+    transform: rotate(-45deg) scale(1);
+  }
+  50% {
+    transform: rotate(-45deg) scale(1.15);
+  }
+}
+
+/* =========================
+   BÓNG BAY
+========================= */
+.balloon {
+  position: absolute;
+  bottom: -120px;
+  width: 60px;
+  animation: fly linear forwards;
+}
+
+@keyframes fly {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-130vh);
   }
 }
